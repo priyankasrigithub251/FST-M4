@@ -1,0 +1,14 @@
+Hive-Activity 2
+
+CREATE TABLE LukeDialoguesCount (line STRING);
+
+LOAD DATA LOCAL INPATH '/root/episodeIV_dialouges.txt' INTO TABLE LukeDialoguesCount;
+
+
+CREATE TABLE HiveActivity2 AS
+SELECT name, count(1) AS count FROM
+(SELECT split(line,'\t')[0] AS name FROM LukeDialoguesCount) n
+WHERE n.name='Luke'
+GROUP BY n.name;
+
+DROP TABLE IF EXISTS HiveActivity2;

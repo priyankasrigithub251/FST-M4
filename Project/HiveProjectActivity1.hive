@@ -1,0 +1,11 @@
+Hive-Activity 1
+
+CREATE TABLE Dialogues (line STRING);
+
+CREATE TABLE speech_count AS
+SELECT name, count(1) AS count FROM
+(SELECT split(line, '\t')[0] AS name FROM Dialogues) n
+GROUP BY n.name
+ORDER BY count DESC;
+
+Select * FROM speech_count;
